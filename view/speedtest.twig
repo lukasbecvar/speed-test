@@ -13,34 +13,33 @@
         </strong>
     </div>
 
-    <div class="gauge-container">
-        <canvas id="speed-gauge"></canvas>
-        <div id="gauge-text">
-            <div class="gauge-speed">0.00</div>
-            <div class="gauge-unit">Mbps</div>
+    <div class="gauges-container">
+        <div class="gauge-wrapper" id="download-wrapper">
+            <h3>Download</h3>
+            <canvas id="download-gauge"></canvas>
+            <div class="gauge-text">
+                <div class="gauge-speed" id="download-speed">0.00</div>
+                <div class="gauge-unit">Mbps</div>
+            </div>
+        </div>
+        <div class="gauge-wrapper" id="upload-wrapper">
+            <h3>Upload</h3>
+            <canvas id="upload-gauge"></canvas>
+            <div class="gauge-text">
+                <div class="gauge-speed" id="upload-speed">0.00</div>
+                <div class="gauge-unit">Mbps</div>
+            </div>
         </div>
     </div>
 
-    <div id="test-results">
-        <div class="result-item">
-            <p>Ping</p>
-            <p><span id="ping">-</span> ms</p>
-        </div>
-        <div class="result-item">
-            <p>Download</p>
-            <p><span id="download">-</span> Mbps</p>
-        </div>
-        <div class="result-item">
-            <p>Upload</p>
-            <p><span id="upload">-</span> Mbps</p>
-        </div>
+    <div id="ping-result">
+        <p>Ping: <span id="ping">-</span> ms</p>
     </div>
 
     <div class="status-text">Press Start to begin</div>
 
-    <button id="start-test">Start Test</button>
+    <button id="start-test">Start</button>
 </div>
-
 {% endblock %}
 
 {% block javascripts %}

@@ -2,15 +2,16 @@ import { Gauge } from 'gaugeJS';
 
 const startButton = document.getElementById('start-test');
 const pingElement = document.getElementById('ping');
-const downloadElement = document.getElementById('download');
-const uploadElement = document.getElementById('upload');
+const downloadSpeedElement = document.getElementById('download-speed');
+const uploadSpeedElement = document.getElementById('upload-speed');
 const statusText = document.querySelector('.status-text');
-const gaugeSpeed = document.querySelector('.gauge-speed');
+const downloadWrapper = document.getElementById('download-wrapper');
+const uploadWrapper = document.getElementById('upload-wrapper');
 
 const testDuration = 10000; // 10 seconds
 
 // Gauge setup
-const opts = {
+const commonOpts = {
     angle: -0.2,
     lineWidth: 0.2,
     radiusScale: 1,
@@ -21,20 +22,22 @@ const opts = {
     },
     limitMax: false,
     limitMin: false,
-    colorStart: '#64ffda',
-    colorStop: '#64ffda',
     strokeColor: '#112240',
     generateGradient: true,
     highDpiSupport: true,
 };
-const target = document.getElementById('speed-gauge');
-const gauge = new Gauge(target).setOptions(opts);
-gauge.maxValue = 100;
-gauge.set(0);
 
-function setGaugeSpeed(speed) {
+const downloadGauge = new Gauge(document.getElementById('download-gauge')).setOptions({ ...commonOpts, colorStart: '#64ffda', colorStop: '#64ffda' });
+const uploadGauge = new Gauge(document.getElementById('upload-gauge')).setOptions({ ...commonOpts, colorStart: '#ff64da', colorStop: '#ff64da' });
+
+downloadGauge.maxValue = 100;
+downloadGauge.set(0);
+uploadGauge.maxValue = 100;
+uploadGauge.set(0);
+
+function setSpeed(gauge, element, speed) {
     gauge.set(speed);
-    gaugeSpeed.textContent = speed.toFixed(2);
+    element.textContent = speed.toFixed(0);
 }
 
 async function testPing() {
@@ -49,6 +52,7 @@ async function testPing() {
 
 async function testDownload() {
     statusText.textContent = 'Testing Download Speed...';
+    downloadWrapper.classList.add('active');
     let totalBytes = 0;
     const startTime = new Date().getTime();
 
@@ -63,8 +67,7 @@ async function testDownload() {
                 totalBytes += value.length;
                 const duration = (new Date().getTime() - startTime) / 1000;
                 const speedMbps = (totalBytes * 8) / duration / 1024 / 1024;
-                downloadElement.textContent = speedMbps.toFixed(2);
-                setGaugeSpeed(speedMbps);
+                setSpeed(downloadGauge, downloadSpeedElement, speedMbps);
             }
         }
     };
@@ -75,6 +78,7 @@ async function testDownload() {
 
 async function testUpload() {
     statusText.textContent = 'Testing Upload Speed...';
+    uploadWrapper.classList.add('active');
     let totalBytes = 0;
     const startTime = new Date().getTime();
     const data = new Blob([new ArrayBuffer(1024 * 1024)], { type: 'application/octet-stream' }); // 1MB
@@ -85,8 +89,7 @@ async function testUpload() {
             totalBytes += data.size;
             const duration = (new Date().getTime() - startTime) / 1000;
             const speedMbps = (totalBytes * 8) / duration / 1024 / 1024;
-            uploadElement.textContent = speedMbps.toFixed(2);
-            setGaugeSpeed(speedMbps);
+            setSpeed(uploadGauge, uploadSpeedElement, speedMbps);
         }
     };
 
@@ -96,17 +99,18 @@ async function testUpload() {
 
 startButton.addEventListener('click', async () => {
     startButton.disabled = true;
+    startButton.textContent = 'Testing...';
     pingElement.textContent = '-';
-    downloadElement.textContent = '-';
-    uploadElement.textContent = '-';
-    setGaugeSpeed(0);
+    setSpeed(downloadGauge, downloadSpeedElement, 0);
+    setSpeed(uploadGauge, uploadSpeedElement, 0);
+    downloadWrapper.classList.remove('active');
+    uploadWrapper.classList.remove('active');
 
     await testPing();
     await testDownload();
-    setGaugeSpeed(0); // Reset gauge after download
     await testUpload();
-    setGaugeSpeed(0); // Reset gauge after upload
 
     statusText.textContent = 'Test Complete!';
+    startButton.textContent = 'Test Again';
     startButton.disabled = false;
 });

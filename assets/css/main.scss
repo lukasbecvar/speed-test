@@ -14,68 +14,81 @@ body {
 
 .container {
     width: 90%;
-    max-width: 800px;
+    max-width: 1800px; /* Allow for very large gauges */
 }
 
 .ip-info {
     font-size: 1rem;
     color: #8892b0;
+    margin-bottom: 30px;
+}
+
+.gauges-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    gap: 5vw;
+}
+
+.gauge-wrapper {
+    position: relative;
+    width: 40vw;
+    max-width: 700px; /* REALLY BIG GAUGE */
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+}
+
+.gauge-wrapper.active {
+    opacity: 1;
+}
+
+.gauge-wrapper h3 {
+    font-size: 2.5rem;
+    color: #64ffda;
     margin-bottom: 20px;
 }
 
-.gauge-container {
-    position: relative;
-    width: 400px;
-    height: 200px;
-    margin: 0 auto 20px;
+.gauge-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
 }
 
-#speed-gauge {
-    width: 100%;
-    height: 100%;
-}
-
-#gauge-text {
+.gauge-text {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 5%; /* Adjust position to be lower */
+    left: 0;
+    right: 0;
+    margin-top: 0;
 }
 
 .gauge-speed {
-    font-size: 3rem;
+    font-size: 4.5rem; /* Smaller font size */
     font-weight: 700;
     color: #fff;
 }
 
 .gauge-unit {
-    font-size: 1.2rem;
-    color: #8892b0;
-}
-
-#test-results {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
-
-.result-item {
-    width: 150px;
-    margin: 10px;
-}
-
-.result-item p:first-child {
-    font-size: 1.2rem;
-    margin: 0 0 10px 0;
-    color: #8892b0;
-}
-
-.result-item p:last-child {
     font-size: 2rem;
-    font-weight: 700;
-    color: #ccd6f6;
-    margin: 0;
+    color: #8892b0;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 1200px) {
+    .gauges-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gauge-wrapper {
+        width: 80vw;
+        margin-bottom: 40px;
+    }
+}
+
+#ping-result {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
 }
 
 .status-text {
@@ -94,7 +107,7 @@ body {
     border-radius: 5px;
     padding: 15px 30px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s ease;
 }
 
 #start-test:hover:not(:disabled) {
