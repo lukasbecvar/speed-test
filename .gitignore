@@ -1,0 +1,20 @@
+# config files
+.env.prod
+
+# build assets
+/public/bundles
+
+# composer dependencies
+/var
+/vendor
+composer.lock
+
+# build assets
+/public/assets
+
+# node modules
+/node_modules
+package-lock.json
+
+# docker services
+/.docker/services

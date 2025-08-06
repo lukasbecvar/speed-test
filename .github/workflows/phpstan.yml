@@ -1,0 +1,30 @@
+# run static analysis with PHPStan
+name: PHPStan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  phpstan:
+    name: PHPStan analyse
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    # setup PHP
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.4
+
+    # install php dependencies
+    - name: Install dependencies
+      run: composer install
+
+    # run PHPStan analyse
+    - name: Run PHPStan
+      run: ./vendor/bin/phpstan analyse --configuration phpstan.neon

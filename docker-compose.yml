@@ -1,0 +1,47 @@
+# docker compose configuration defines local development stack
+
+# docker network config
+networks:
+    main:
+        driver: bridge
+
+services:
+    # composer service for managing php dependencies
+    composer:
+        image: composer:latest
+        container_name: speed_test_composer
+        working_dir: /app
+        volumes:
+            - .:/app
+        networks:
+            - main
+        command: composer install
+
+    # node service for building frontend assets
+    node:
+        image: node:latest
+        container_name: speed_test_node
+        working_dir: /app
+        volumes:
+            - .:/app
+        networks:
+            - main
+        command: npm run watch
+
+    # web server service
+    php:
+        build:
+            context: .
+            dockerfile: ./.docker/Dockerfile
+        container_name: speed_test_webserver
+        restart: always
+        volumes:
+            - ./.docker/configs/apache-site.conf:/etc/apache2/sites-available/000-default.conf
+            - ./.docker/configs/php.ini:/usr/local/etc/php/php.ini:ro
+            - ./.docker/services/log:/var/log
+            - ./:/var/www
+        mem_limit: 1g
+        ports:
+            - "80:80"
+        networks:
+            - main

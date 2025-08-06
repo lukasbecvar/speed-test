@@ -1,0 +1,40 @@
+# run unit tests with PHPUnit
+name: PHPUnit Tests
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  phpunit:
+    name: Run PHPUnit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # setup PHP
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          extensions: intl
+
+      # install php dependencies
+      - name: Install dependencies
+        run: composer install --no-interaction --no-progress
+      
+      # install frontend dependencies
+      - name: Install node-modules
+        run: npm install --loglevel=error
+
+      # build frontend assets
+      - name: Build assets
+        run: npm run build
+
+      # run PHPUnit tests
+      - name: Run PHPUnit tests
+        run: php ./bin/phpunit

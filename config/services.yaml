@@ -1,0 +1,39 @@
+services:
+    _defaults:
+        autowire: true      # automatically injects dependencies
+        autoconfigure: true # automatically register services
+
+    # define autowiring services for App namespace
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # exception event subscriber
+    App\Event\Subscriber\ExceptionEventSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    # app middlewares
+    # --------------------------------------------------------------------------------- #
+    # check if assets are builded
+    App\Middleware\AssetsCheckMiddleware:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 5 }
+
+    # escape request data (for security)
+    App\Middleware\EscapeRequestDataMiddleware:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 4 }
+
+    # security security rules
+    App\Middleware\SecurityCheckMiddleware:
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 2 }
+
+    # handle maintenance mode
+    App\Middleware\MaintenanceMiddleware:
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 1 }
+    # --------------------------------------------------------------------------------- #
