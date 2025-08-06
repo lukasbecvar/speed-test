@@ -22,9 +22,15 @@ class IndexController extends AbstractController
      * @return Response The main page response
      */
     #[Route('/', methods: ['GET'], name: 'main_index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        return $this->render('speedtest.twig');
+        $ipAddress = $request->getClientIp();
+        $isPrivate = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
+
+        return $this->render('speedtest.twig', [
+            'ipAddress' => $ipAddress,
+            'isPrivate' => $isPrivate,
+        ]);
     }
 
     /**

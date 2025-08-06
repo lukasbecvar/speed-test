@@ -3,10 +3,29 @@
 {% block body %}
 <div class="container">
     <h1>Speed Test</h1>
+    <div class="ip-info">
+        Your IP Address: 
+        <strong>
+            {% if isPrivate %}
+                {{ ipAddress }} (Private Range)
+            {% else %}
+                {{ ipAddress }}
+            {% endif %}
+        </strong>
+    </div>
     <div id="test-results">
-        <p><strong>Ping:</strong> <span id="ping">-</span> ms</p>
-        <p><strong>Download Speed:</strong> <span id="download">-</span> Mbps</p>
-        <p><strong>Upload Speed:</strong> <span id="upload">-</span> Mbps</p>
+        <div class="result-item">
+            <p>Ping</p>
+            <p><span id="ping">-</span> ms</p>
+        </div>
+        <div class="result-item">
+            <p>Download</p>
+            <p><span id="download">-</span> Mbps</p>
+        </div>
+        <div class="result-item">
+            <p>Upload</p>
+            <p><span id="upload">-</span> Mbps</p>
+        </div>
     </div>
     <button id="start-test">Start Test</button>
 </div>
@@ -81,9 +100,9 @@
 
     startButton.addEventListener('click', async () => {
         startButton.disabled = true;
-        pingElement.textContent = 'testing...';
-        downloadElement.textContent = 'testing...';
-        uploadElement.textContent = 'testing...';
+        pingElement.textContent = '-';
+        downloadElement.textContent = '-';
+        uploadElement.textContent = '-';
 
         await testPing();
         await testDownload();

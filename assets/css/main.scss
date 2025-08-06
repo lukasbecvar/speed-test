@@ -1,48 +1,85 @@
-/* main page style */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 body {
-    font-family: sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Roboto', sans-serif;
+    background-color: #0a192f; /* Very dark blue */
+    color: #ccd6f6; /* Light grey/blue */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
 .container {
+    width: 90%;
     max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
+    font-weight: 700;
+    font-size: 3rem;
+    color: #64ffda; /* A minty green/cyan as an accent */
     margin-bottom: 20px;
 }
 
-#test-results p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+.ip-info {
+    font-size: 1.1rem;
+    color: #8892b0; /* Lighter grey/blue */
+    margin-bottom: 40px;
 }
+
+#test-results {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.result-item {
+    background-color: #112240; /* A slightly lighter dark blue */
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    margin: 10px;
+    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
+}
+
+.result-item p:first-child {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+}
+
+.result-item p:last-child {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #64ffda;
+    margin: 0;
+}
+
+.result-item span {
+    font-size: 2.5rem; /* Ensure span is the right size */
+}
+
 
 #start-test {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    font-size: 1.2rem;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #64ffda;
+    background-color: transparent;
+    border: 2px solid #64ffda;
     border-radius: 5px;
+    padding: 15px 30px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-#start-test:hover {
-    background-color: #0056b3;
+#start-test:hover:not(:disabled) {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+#start-test:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
