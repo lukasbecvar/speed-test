@@ -56,34 +56,28 @@ body {
 
 .gauge-text {
     position: absolute;
-    bottom: 5%; /* Adjust position to be lower */
+    bottom: -5%;
     left: 0;
     right: 0;
     margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .gauge-speed {
-    font-size: 4.5rem; /* Smaller font size */
+    font-size: 4.5rem;
     font-weight: 700;
     color: #fff;
+    order: 2;
 }
 
 .gauge-unit {
-    font-size: 2rem;
+    font-size: 1.2rem;
     color: #8892b0;
-}
-
-/* Responsive layout for smaller screens */
-@media (max-width: 1200px) {
-    .gauges-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .gauge-wrapper {
-        width: 80vw;
-        margin-bottom: 40px;
-    }
+    order: 1;
+    margin-bottom: 0px;
 }
 
 #ping-result {
@@ -118,4 +112,82 @@ body {
     cursor: not-allowed;
     border-color: #8892b0;
     color: #8892b0;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 1200px) {
+    .gauges-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gauge-wrapper {
+        width: 80vw;
+        margin-bottom: 40px;
+        max-width: 500px;
+    }
+    .gauge-wrapper h3 {
+        font-size: 2rem;
+    }
+    .gauge-speed {
+        font-size: 3.5rem; /* Adjusted for 1200px */
+    }
+    .gauge-unit {
+        font-size: 1.1rem;
+    }
+    .gauge-text {
+        bottom: -2%;
+    }
+}
+
+@media (max-width: 768px) {
+    .gauge-wrapper {
+        width: 90vw;
+        max-width: 400px;
+    }
+    .gauge-wrapper h3 {
+        font-size: 1.8rem;
+    }
+    .gauge-speed {
+        font-size: 3rem; /* Adjusted for 768px */
+    }
+    .gauge-unit {
+        font-size: 1rem;
+    }
+    .gauge-text {
+        bottom: 0%;
+    }
+}
+
+@media (max-width: 480px) {
+    .gauge-wrapper {
+        width: 95vw;
+        max-width: 300px;
+    }
+    .gauge-wrapper h3 {
+        font-size: 1.5rem;
+    }
+    .gauge-speed {
+        font-size: 2.5rem; /* Adjusted for 480px */
+    }
+    .gauge-unit {
+        font-size: 0.9rem;
+    }
+    .gauge-text {
+        bottom: 5%;
+    }
+    #ping-result {
+        font-size: 1.2rem;
+    }
+    .status-text {
+        font-size: 1.2rem;
+        color: #64ffda;
+        margin-bottom: 30px;
+        height: 20px;
+    }
+
+    #start-test {
+        font-size: 1.2rem;
+        padding: 10px 20px;
+    }
 }
