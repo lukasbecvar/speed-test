@@ -7,34 +7,41 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 93vh;
     margin: 0;
     text-align: center;
 }
 
 .container {
-    width: 90%;
-    max-width: 1800px; /* Allow for very large gauges */
+    width: 99%;
+    padding: 5px;
+    box-sizing: border-box;
 }
 
 .ip-info {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #8892b0;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+}
+
+#ping-result {
+    font-size: 1.6rem;
+    margin-bottom: 10px !important;
+    color: #64ffda;
 }
 
 .gauges-container {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    margin-bottom: 30px;
-    gap: 5vw;
+    margin-bottom: 10px;
+    gap: 3vw;
 }
 
 .gauge-wrapper {
     position: relative;
     width: 40vw;
-    max-width: 700px; /* REALLY BIG GAUGE */
+    max-width: 700px;
     opacity: 0.5;
     transition: opacity 0.5s ease;
 }
@@ -44,9 +51,9 @@ body {
 }
 
 .gauge-wrapper h3 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: #64ffda;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 
 .gauge-wrapper canvas {
@@ -67,39 +74,34 @@ body {
 }
 
 .gauge-speed {
-    font-size: 4.5rem;
+    font-size: 4.8rem;
     font-weight: 700;
     color: #fff;
     order: 2;
 }
 
 .gauge-unit {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #8892b0;
     order: 1;
     margin-bottom: 0px;
 }
 
-#ping-result {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
 .status-text {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #64ffda;
-    margin-bottom: 30px;
-    height: 20px;
+    margin-bottom: 20px;
+    height: 25px;
 }
 
 #start-test {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: #64ffda;
     background-color: transparent;
     border: 2px solid #64ffda;
     border-radius: 5px;
-    padding: 15px 30px;
+    padding: 18px 35px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -115,60 +117,109 @@ body {
 }
 
 /* Responsive layout for smaller screens */
+@media (max-width: 1400px) {
+    .gauge-wrapper h3 {
+        font-size: 2.2rem;
+    }
+    .gauge-speed {
+        font-size: 4.2rem;
+    }
+}
+
 @media (max-width: 1200px) {
     .gauges-container {
         flex-direction: column;
         align-items: center;
+        gap: 30px;
     }
 
     .gauge-wrapper {
-        width: 80vw;
-        margin-bottom: 40px;
-        max-width: 500px;
+        width: 70vw;
+        margin-bottom: 0;
+        max-width: 850px;
     }
     .gauge-wrapper h3 {
         font-size: 2rem;
     }
     .gauge-speed {
-        font-size: 3.5rem; /* Adjusted for 1200px */
+        font-size: 3.8rem;
     }
     .gauge-unit {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
     .gauge-text {
         bottom: -2%;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .gauge-wrapper {
-        width: 90vw;
-        max-width: 400px;
+        width: 80vw;
+        max-width: 450px;
     }
     .gauge-wrapper h3 {
         font-size: 1.8rem;
     }
     .gauge-speed {
-        font-size: 3rem; /* Adjusted for 768px */
+        font-size: 3.2rem;
     }
     .gauge-unit {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
     .gauge-text {
         bottom: 0%;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    .container {
+        padding: 5px;
+    }
+    .ip-info {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    #ping-result {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+    .gauge-wrapper {
+        width: 90vw;
+        max-width: 380px;
+    }
+    .gauge-wrapper h3 {
+        font-size: 1.6rem;
+    }
+    .gauge-speed {
+        font-size: 2.8rem;
+    }
+    .gauge-unit {
+        font-size: 1rem;
+    }
+    .gauge-text {
+        bottom: 2%;
+    }
+    .status-text {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        height: 20px;
+    }
+    #start-test {
+        font-size: 1.4rem;
+        padding: 15px 30px;
+    }
+}
+
+@media (max-width: 576px) {
     .gauge-wrapper {
         width: 95vw;
         max-width: 300px;
     }
     .gauge-wrapper h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     .gauge-speed {
-        font-size: 2.5rem; /* Adjusted for 480px */
+        font-size: 2.2rem;
     }
     .gauge-unit {
         font-size: 0.9rem;
@@ -180,14 +231,10 @@ body {
         font-size: 1.2rem;
     }
     .status-text {
-        font-size: 1.2rem;
-        color: #64ffda;
-        margin-bottom: 30px;
-        height: 20px;
+        font-size: 1rem;
     }
-
     #start-test {
         font-size: 1.2rem;
-        padding: 10px 20px;
+        padding: 12px 25px;
     }
 }
