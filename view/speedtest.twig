@@ -1,5 +1,95 @@
 {% extends 'common/main-base.twig' %}
 
 {% block body %}
-    <h1>speed test</h1>
+<div class="container">
+    <h1>Speed Test</h1>
+    <div id="test-results">
+        <p><strong>Ping:</strong> <span id="ping">-</span> ms</p>
+        <p><strong>Download Speed:</strong> <span id="download">-</span> Mbps</p>
+        <p><strong>Upload Speed:</strong> <span id="upload">-</span> Mbps</p>
+    </div>
+    <button id="start-test">Start Test</button>
+</div>
+
+<script>
+    const startButton = document.getElementById('start-test');
+    const pingElement = document.getElementById('ping');
+    const downloadElement = document.getElementById('download');
+    const uploadElement = document.getElementById('upload');
+
+    const testDuration = 10000; // 10 seconds
+
+    async function testPing() {
+        const startTime = new Date().getTime();
+        await fetch('/ping', { method: 'HEAD', cache: 'no-store' });
+        const endTime = new Date().getTime();
+        pingElement.textContent = endTime - startTime;
+    }
+
+    async function testDownload() {
+        let totalBytes = 0;
+        const startTime = new Date().getTime();
+
+        const download = async () => {
+            while ((new Date().getTime() - startTime) < testDuration) {
+                const response = await fetch('/download?nocache=' + new Date().getTime());
+                const reader = response.body.getReader();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) {
+                        break;
+                    }
+                    totalBytes += value.length;
+                    const duration = (new Date().getTime() - startTime) / 1000;
+                    const speedMbps = (totalBytes * 8) / duration / 1024 / 1024;
+                    downloadElement.textContent = speedMbps.toFixed(2);
+                }
+            }
+        };
+
+        const downloads = [];
+        for (let i = 0; i < 5; i++) { // 5 parallel downloads
+            downloads.push(download());
+        }
+
+        await Promise.all(downloads);
+    }
+
+    async function testUpload() {
+        let totalBytes = 0;
+        const startTime = new Date().getTime();
+        const data = new Blob([new ArrayBuffer(1024 * 1024)], { type: 'application/octet-stream' }); // 1MB
+
+        const upload = async () => {
+            while ((new Date().getTime() - startTime) < testDuration) {
+                await fetch('/upload', { method: 'POST', body: data });
+                totalBytes += data.size;
+                const duration = (new Date().getTime() - startTime) / 1000;
+                const speedMbps = (totalBytes * 8) / duration / 1024 / 1024;
+                uploadElement.textContent = speedMbps.toFixed(2);
+            }
+        };
+
+        const uploads = [];
+        for (let i = 0; i < 5; i++) { // 5 parallel uploads
+            uploads.push(upload());
+        }
+
+        await Promise.all(uploads);
+    }
+
+    startButton.addEventListener('click', async () => {
+        startButton.disabled = true;
+        pingElement.textContent = 'testing...';
+        downloadElement.textContent = 'testing...';
+        uploadElement.textContent = 'testing...';
+
+        await testPing();
+        await testDownload();
+        await testUpload();
+
+        startButton.disabled = false;
+    });
+</script>
 {% endblock %}
