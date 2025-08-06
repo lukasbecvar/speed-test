@@ -5,6 +5,7 @@
         "@symfony/webpack-encore": "^5.1.0",
         "core-js": "^3.43.0",
         "file-loader": "^6.2.0",
+        "gaugeJS": "github:bernii/gauge.js",
         "regenerator-runtime": "^0.14.1",
         "sass": "^1.89.2",
         "sass-loader": "^16.0.5",

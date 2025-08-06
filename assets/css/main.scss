@@ -2,66 +2,88 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #0a192f; /* Very dark blue */
-    color: #ccd6f6; /* Light grey/blue */
+    background-color: #0a192f;
+    color: #ccd6f6;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    text-align: center;
 }
 
 .container {
     width: 90%;
     max-width: 800px;
-    text-align: center;
-}
-
-h1 {
-    font-weight: 700;
-    font-size: 3rem;
-    color: #64ffda; /* A minty green/cyan as an accent */
-    margin-bottom: 20px;
 }
 
 .ip-info {
-    font-size: 1.1rem;
-    color: #8892b0; /* Lighter grey/blue */
-    margin-bottom: 40px;
+    font-size: 1rem;
+    color: #8892b0;
+    margin-bottom: 20px;
+}
+
+.gauge-container {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    margin: 0 auto 20px;
+}
+
+#speed-gauge {
+    width: 100%;
+    height: 100%;
+}
+
+#gauge-text {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gauge-speed {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.gauge-unit {
+    font-size: 1.2rem;
+    color: #8892b0;
 }
 
 #test-results {
     display: flex;
     justify-content: space-around;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     flex-wrap: wrap;
 }
 
 .result-item {
-    background-color: #112240; /* A slightly lighter dark blue */
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
+    width: 150px;
     margin: 10px;
-    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.7);
 }
 
 .result-item p:first-child {
     font-size: 1.2rem;
     margin: 0 0 10px 0;
+    color: #8892b0;
 }
 
 .result-item p:last-child {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: #64ffda;
+    color: #ccd6f6;
     margin: 0;
 }
 
-.result-item span {
-    font-size: 2.5rem; /* Ensure span is the right size */
+.status-text {
+    font-size: 1.2rem;
+    color: #64ffda;
+    margin-bottom: 30px;
+    height: 20px;
 }
-
 
 #start-test {
     font-size: 1.5rem;
@@ -81,5 +103,6 @@ h1 {
 
 #start-test:disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    border-color: #8892b0;
+    color: #8892b0;
 }

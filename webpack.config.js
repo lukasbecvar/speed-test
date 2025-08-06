@@ -9,6 +9,7 @@ Encore
     // register css
     .addEntry('main-css', './assets/css/main.scss')
     .addEntry('error-page-css', './assets/css/error-page.scss')
+    .addEntry('app', './assets/js/app.js')
 
     // copy static assets
     .copyFiles({
