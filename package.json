@@ -10,8 +10,7 @@
         "sass-loader": "^16.0.5",
         "webpack": "^5.74.0",
         "webpack-cli": "^5.1.4",
-        "webpack-notifier": "^1.15.0",
-        "highlight.js": "^11.11.1"
+        "webpack-notifier": "^1.15.0"
     },
     "license": "MIT",
     "private": true,
