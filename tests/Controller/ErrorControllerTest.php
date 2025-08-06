@@ -32,7 +32,7 @@ class ErrorControllerTest extends WebTestCase
         $this->client->request('GET', '/error');
 
         // assert response
-        $this->assertSelectorTextContains('.error-page-msg', 'Unknown error, please contact the service administrator');
+        $this->assertSelectorTextContains('.error-message', 'An unknown error occurred');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 
@@ -46,7 +46,7 @@ class ErrorControllerTest extends WebTestCase
         $this->client->request('GET', '/error?code=maintenance');
 
         // assert response
-        $this->assertSelectorTextContains('.error-page-msg', 'Unknown error, please contact the service administrator');
+        $this->assertSelectorTextContains('.error-message', 'An unknown error occurred');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 
@@ -61,7 +61,7 @@ class ErrorControllerTest extends WebTestCase
 
         // assert response
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertSelectorTextContains('.error-page-msg', 'Error: Bad request');
+        $this->assertSelectorTextContains('.error-message', 'Bad Request');
     }
 
     /**
@@ -74,7 +74,7 @@ class ErrorControllerTest extends WebTestCase
         $this->client->request('GET', '/error?code=404');
 
         // assert response
-        $this->assertSelectorTextContains('.error-page-msg', 'Error: Page not found');
+        $this->assertSelectorTextContains('.error-message', 'Page not found');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 
@@ -88,7 +88,7 @@ class ErrorControllerTest extends WebTestCase
         $this->client->request('GET', '/error?code=429');
 
         // assert response
-        $this->assertSelectorTextContains('.error-page-msg', 'Error: Too Many Requests');
+        $this->assertSelectorTextContains('.error-message', 'Too Many Requests');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 
@@ -102,7 +102,7 @@ class ErrorControllerTest extends WebTestCase
         $this->client->request('GET', '/error?code=500');
 
         // assert response
-        $this->assertSelectorTextContains('.error-page-msg', 'Internal Server Error');
+        $this->assertSelectorTextContains('.error-message', 'Internal Server Error');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 }

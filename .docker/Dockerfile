@@ -5,6 +5,8 @@ FROM php:8.4-apache
 WORKDIR /var/www
 
 # copy project files to container
+# COPY ./.docker/configs/apache-site.conf /etc/apache2/sites-available/000-default.conf
+# COPY ./.docker/configs/php.ini /usr/local/etc/php/php.ini:ro
 # COPY . /var/www/
 
 # install required packages
