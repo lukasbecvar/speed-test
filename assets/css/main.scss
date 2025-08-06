@@ -82,7 +82,7 @@ body {
 
 .gauge-unit {
     font-size: 1.3rem;
-    color: #8892b0;
+    color: #c7cde3;
     order: 1;
     margin-bottom: 0px;
 }
@@ -117,7 +117,7 @@ body {
 }
 
 /* Responsive layout for smaller screens */
-@media (max-width: 1400px) {
+@media (max-width: 1200px) {
     .gauge-wrapper h3 {
         font-size: 2.2rem;
     }
@@ -126,7 +126,20 @@ body {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
+    .gauge-text {
+        font-size: 3rem;
+        bottom: -12%;
+    }
+}
+
+@media (max-width: 900px) {
+    .gauge-text {
+        bottom: -14%;
+    }
+}
+
+@media (max-width: 500px) {
     .gauges-container {
         flex-direction: column;
         align-items: center;
@@ -152,7 +165,7 @@ body {
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 500px) {
     .gauge-wrapper {
         width: 80vw;
         max-width: 450px;
@@ -197,7 +210,7 @@ body {
         font-size: 1rem;
     }
     .gauge-text {
-        bottom: 2%;
+        bottom: -6%;
     }
     .status-text {
         font-size: 1.1rem;
@@ -225,7 +238,7 @@ body {
         font-size: 0.9rem;
     }
     .gauge-text {
-        bottom: 5%;
+        bottom: -8%;
     }
     #ping-result {
         font-size: 1.2rem;

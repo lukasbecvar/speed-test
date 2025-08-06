@@ -8,7 +8,7 @@ const statusText = document.querySelector('.status-text');
 const downloadWrapper = document.getElementById('download-wrapper');
 const uploadWrapper = document.getElementById('upload-wrapper');
 
-const testDuration = 10000; // 10 seconds
+const testDuration = 20000; // 20 seconds
 
 // Gauge setup
 const commonOpts = {
@@ -22,7 +22,7 @@ const commonOpts = {
     },
     limitMax: false,
     limitMin: false,
-    strokeColor: '#112240',
+    strokeColor: '#29416e',
     generateGradient: true,
     highDpiSupport: true,
 };

@@ -8,7 +8,10 @@ Encore
 
     // register css
     .addEntry('main-css', './assets/css/main.scss')
+    .addEntry('scrollbar-css', './assets/css/scrollbar.scss')
     .addEntry('error-page-css', './assets/css/error-page.scss')
+
+    // register js
     .addEntry('app', './assets/js/app.js')
 
     // copy static assets
