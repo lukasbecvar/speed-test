@@ -1,5 +1,7 @@
 {% extends 'common/error-base.twig' %}
 
 {% block body %}
-    <p class="error-page-msg">Internal Server Error</p>
+    <div class="error-code">500</div>
+    <div class="error-message">Internal Server Error</div>
+    <a href="/" class="home-link">Go to Homepage</a>
 {% endblock %}

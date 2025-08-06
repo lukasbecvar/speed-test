@@ -1,5 +1,7 @@
 {% extends 'common/error-base.twig' %}
 
 {% block body %}
-    <p class="error-page-msg">Error: Page not found</p>
+    <div class="error-code">404</div>
+    <div class="error-message">Page not found</div>
+    <a href="/" class="home-link">Go to Homepage</a>
 {% endblock %}

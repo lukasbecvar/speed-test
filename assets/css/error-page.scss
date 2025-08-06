@@ -1,30 +1,42 @@
-/* error page style */
+/* Simple error page style */
 body {
-    position: fixed;
+    background-color: #0d1b2a; /* Dark Blue */
+    color: #e0e1dd; /* Light Gray/White */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     margin: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #282c34;
-}
-
-.error-page-msg {
-    position: absolute;
-    color: white;
-    top: 35%;
-    left: 50%;
-    width: 95%;
-    opacity: 0.9;
-    font-size: 28px;
-    user-select: none;
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     text-align: center;
-    transform: translate(-50%, -50%);
-    font-family: 'Maven Pro', sans-serif;
 }
 
-@media screen and (max-width: 800px) { 
-    .error-page-msg {
-        width: 80%;
-        font-size: 18px;
-    }
+.error-container {
+    padding: 20px;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #415a77; /* Lighter blue */
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 2rem;
+}
+
+.home-link {
+    color: #e0e1dd;
+    text-decoration: none;
+    border: 1px solid #e0e1dd;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.home-link:hover {
+    background-color: #e0e1dd;
+    color: #0d1b2a;
 }

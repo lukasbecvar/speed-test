@@ -1,5 +1,7 @@
 {% extends 'common/error-base.twig' %}
 
 {% block body %}
-    <p class="error-page-msg">The service is temporarily unavailable due to maintenance</p>
+    <div class="error-code">503</div>
+    <div class="error-message">Service Unavailable</div>
+    <a href="/" class="home-link">Go to Homepage</a>
 {% endblock %}

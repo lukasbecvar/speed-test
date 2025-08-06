@@ -1,5 +1,7 @@
 {% extends 'common/error-base.twig' %}
 
 {% block body %}
-    <p class="error-page-msg">Error: Bad request</p>
+    <div class="error-code">400</div>
+    <div class="error-message">Bad Request</div>
+    <a href="/" class="home-link">Go to Homepage</a>
 {% endblock %}

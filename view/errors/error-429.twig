@@ -1,5 +1,7 @@
 {% extends 'common/error-base.twig' %}
 
 {% block body %}
-    <p class="error-page-msg">Error: Too Many Requests</p>
+    <div class="error-code">429</div>
+    <div class="error-message">Too Many Requests</div>
+    <a href="/" class="home-link">Go to Homepage</a>
 {% endblock %}

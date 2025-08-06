@@ -1,5 +1,7 @@
 {% extends 'common/error-base.twig' %}
 
 {% block body %}
-    <p class="error-page-msg">Your browser does not support the HTTPS protocol or JavaScript is disabled.</p>
+    <div class="error-code">426</div>
+    <div class="error-message">Upgrade Required</div>
+    <a href="/" class="home-link">Go to Homepage</a>
 {% endblock %}
