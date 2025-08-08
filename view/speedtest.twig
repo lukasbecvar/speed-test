@@ -40,6 +40,27 @@
 
     <button id="start-test">Start</button>
 </div>
+
+<div id="results-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <h2>Test Complete!</h2>
+        <div class="results-summary">
+            <div class="result-item">
+                <span class="result-label">Ping</span>
+                <div class="result-value"><span id="ping-result-modal"></span> ms</div>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Max Download</span>
+                <div class="result-value"><span id="max-download-result"></span> Mbps</div>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Max Upload</span>
+                <div class="result-value"><span id="max-upload-result"></span> Mbps</div>
+            </div>
+        </div>
+        <button id="close-modal">Test Again</button>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
