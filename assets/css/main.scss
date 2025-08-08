@@ -40,8 +40,8 @@ body {
 
 .gauge-wrapper {
     position: relative;
-    width: 40vw;
-    max-width: 700px;
+    width: 45vw; /* Increased size */
+    max-width: 800px; /* Increased max-width */
     opacity: 0.5;
     transition: opacity 0.5s ease;
 }

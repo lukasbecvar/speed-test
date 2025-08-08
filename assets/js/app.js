@@ -23,27 +23,68 @@ let maxUploadSpeed = 0;
 // Gauge setup
 const commonOpts = {
     angle: -0.2,
-    lineWidth: 0.2,
-    radiusScale: 1,
+    lineWidth: 0.1,
+    radiusScale: 0.9,
     pointer: {
         length: 0.6,
         strokeWidth: 0.035,
         color: '#ccd6f6'
     },
-    limitMax: false,
     limitMin: false,
     strokeColor: '#29416e',
-    generateGradient: true,
     highDpiSupport: true,
+    staticLabels: {
+        font: "12px sans-serif",
+        labels: [0, 10, 20, 50, 100],
+        color: "#8892b0",
+        fractionDigits: 0
+    },
+    staticZones: [
+       {strokeStyle: "#30B32D", min: 0, max: 20},
+       {strokeStyle: "#FFDD00", min: 20, max: 50},
+       {strokeStyle: "#F03E3E", min: 50, max: 100}
+    ],
+    renderTicks: {
+        divisions: 5,
+        divWidth: 1.1,
+        divLength: 0.7,
+        divColor: '#333333',
+        subDivisions: 3,
+        subLength: 0.5,
+        subWidth: 0.6,
+        subColor: '#666666'
+    }
 };
 
-const downloadGauge = new Gauge(document.getElementById('download-gauge')).setOptions({ ...commonOpts, colorStart: '#64ffda', colorStop: '#64ffda' });
-const uploadGauge = new Gauge(document.getElementById('upload-gauge')).setOptions({ ...commonOpts, colorStart: '#ff64da', colorStop: '#ff64da' });
+const downloadGauge = new Gauge(document.getElementById('download-gauge')).setOptions(JSON.parse(JSON.stringify(commonOpts)));
+const uploadGauge = new Gauge(document.getElementById('upload-gauge')).setOptions(JSON.parse(JSON.stringify(commonOpts)));
 
 downloadGauge.maxValue = 100;
 downloadGauge.set(0);
 uploadGauge.maxValue = 100;
 uploadGauge.set(0);
+
+function updateGaugeScale(gauge, speed) {
+    if (speed > gauge.maxValue) {
+        let newMax;
+        if (speed < 100) newMax = 100;
+        else if (speed < 250) newMax = 250;
+        else if (speed < 500) newMax = 500;
+        else if (speed < 1000) newMax = 1000;
+        else newMax = 5000;
+
+        if (newMax > gauge.maxValue) {
+            const newLabels = [0, newMax * 0.2, newMax * 0.5, newMax * 0.8, newMax].map(l => Math.round(l));
+            gauge.options.staticLabels.labels = newLabels;
+            gauge.options.staticZones = [
+               {strokeStyle: "#30B32D", min: 0, max: newMax * 0.4},
+               {strokeStyle: "#FFDD00", min: newMax * 0.4, max: newMax * 0.8},
+               {strokeStyle: "#F03E3E", min: newMax * 0.8, max: newMax}
+            ];
+            gauge.maxValue = newMax;
+        }
+    }
+}
 
 function setSpeed(gauge, element, speed) {
     gauge.set(speed);
@@ -78,6 +119,7 @@ async function testDownload() {
                 totalBytes += value.length;
                 const duration = (new Date().getTime() - startTime) / 1000;
                 const speedMbps = (totalBytes * 8) / duration / 1024 / 1024;
+                updateGaugeScale(downloadGauge, speedMbps);
                 if (speedMbps > maxDownloadSpeed) {
                     maxDownloadSpeed = speedMbps;
                 }
@@ -104,6 +146,7 @@ async function testUpload() {
             totalBytes += data.size;
             const duration = (new Date().getTime() - startTime) / 1000;
             const speedMbps = (totalBytes * 8) / duration / 1024 / 1024;
+            updateGaugeScale(uploadGauge, speedMbps);
             if (speedMbps > maxUploadSpeed) {
                 maxUploadSpeed = speedMbps;
             }
