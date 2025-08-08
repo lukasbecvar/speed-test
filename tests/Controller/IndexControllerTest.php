@@ -27,9 +27,54 @@ class IndexControllerTest extends WebTestCase
      *
      * @return void
      */
-    public function testLoadIndex(): void
+    public function testLoadMainPage(): void
     {
         $this->client->request('GET', '/');
+
+        // check response status
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        // check for specific content on the page
+        $this->assertSelectorTextContains('h3', 'Download');
+        $this->assertSelectorTextContains('button', 'Start');
+        $this->assertSelectorTextContains('div', 'Press Start to begin');
+    }
+
+    /**
+     * Test ping check endpoint
+     *
+     * @return void
+     */
+    public function testPingCheck(): void
+    {
+        $this->client->request('HEAD', '/ping');
+
+        // check response status
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+    }
+
+    /**
+     * Test download speed check endpoint
+     *
+     * @return void
+     */
+    public function testDownloadSpeedCheck(): void
+    {
+        $this->client->request('GET', '/download');
+
+        // check response status
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertResponseHeaderSame('Content-Type', 'application/octet-stream');
+    }
+
+    /**
+     * Test upload speed check endpoint
+     *
+     * @return void
+     */
+    public function testUploadSpeedCheck(): void
+    {
+        $this->client->request('POST', '/upload');
 
         // check response status
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
