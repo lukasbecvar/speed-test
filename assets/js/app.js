@@ -106,11 +106,18 @@ startButton.addEventListener('click', async () => {
     downloadWrapper.classList.remove('active');
     uploadWrapper.classList.remove('active');
 
-    await testPing();
-    await testDownload();
-    await testUpload();
-
-    statusText.textContent = 'Test Complete!';
-    startButton.textContent = 'Test Again';
-    startButton.disabled = false;
+    try {
+        await testPing();
+        await testDownload();
+        await testUpload();
+        statusText.textContent = 'Test Complete!';
+    } catch (error) {
+        console.error('Speed test failed:', error);
+        statusText.textContent = 'Error: Connection to server lost.';
+        setSpeed(downloadGauge, downloadSpeedElement, 0);
+        setSpeed(uploadGauge, uploadSpeedElement, 0);
+    } finally {
+        startButton.textContent = 'Test Again';
+        startButton.disabled = false;
+    }
 });
