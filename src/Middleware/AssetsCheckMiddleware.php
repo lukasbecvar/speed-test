@@ -25,8 +25,8 @@ class AssetsCheckMiddleware
     {
         if (!file_exists(__DIR__ . '/../../public/assets/')) {
             $response = new Response(
-                'Error: build resources not found, please contact service administrator & report this bug on email: ' . $_ENV['CONTACT_EMAIL'],
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                content: 'Error: build resources not found, please contact service administrator & report this bug on email: ' . $_ENV['CONTACT_EMAIL'],
+                status: Response::HTTP_INTERNAL_SERVER_ERROR
             );
             $event->setResponse($response);
         }

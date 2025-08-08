@@ -32,7 +32,7 @@ services:
     php:
         build:
             context: .
-            dockerfile: ./.docker/Dockerfile
+            dockerfile: ./.docker/Dockerfile.dev
         container_name: speed_test_webserver
         restart: always
         volumes:

@@ -34,7 +34,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Ping endpoint
+     * Ping test endpoint
      *
      * @return Response
      */
@@ -45,7 +45,7 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Download endpoint
+     * Download speed test endpoint
      *
      * @return Response
      */
@@ -58,13 +58,12 @@ class IndexController extends AbstractController
     }
 
     /**
-     * Upload endpoint
+     * Upload speed test endpoint
      *
-     * @param Request $request
      * @return Response
      */
     #[Route('/upload', methods: ['POST'], name: 'upload')]
-    public function upload(Request $request): Response
+    public function upload(): Response
     {
         return new Response();
     }

@@ -12,7 +12,7 @@ Encore
     .addEntry('error-page-css', './assets/css/error-page.scss')
 
     // register js
-    .addEntry('app', './assets/js/app.js')
+    .addEntry('main', './assets/js/main.js')
 
     // copy static assets
     .copyFiles({
