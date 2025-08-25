@@ -1,6 +1,4 @@
-# dockerfile for production image build
-
-# define base php-apache image
+# define base php-apache image for production environment
 FROM php:8.4-apache
 
 # set container working directory
@@ -9,14 +7,7 @@ WORKDIR /var/www
 # install required packages
 RUN apt-get update && apt-get install -y \
     libicu-dev \
-    unzip \
-    curl \
-    rpm \
-    git \
-    npm
-
-# install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    rpm
 
 # install intl extension
 RUN docker-php-ext-install intl
@@ -32,13 +23,6 @@ COPY . /var/www/
 # setup environment config
 RUN sed -i 's/^\(APP_ENV=\)dev/\1prod/' .env
 RUN cp .env.dev .env.prod
-
-# install app dependencies
-RUN composer install --no-interaction --no-progress
-RUN npm install --loglevel=error
-
-# build frontend assets
-RUN npm run build
 
 # set storage permissions
 RUN chmod -R 777 var/

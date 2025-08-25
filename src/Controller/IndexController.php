@@ -29,7 +29,7 @@ class IndexController extends AbstractController
 
         return $this->render('speedtest.twig', [
             'ipAddress' => $ipAddress,
-            'isPrivate' => $isPrivate,
+            'isPrivate' => $isPrivate
         ]);
     }
 

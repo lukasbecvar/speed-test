@@ -20,12 +20,12 @@ services:
     # check if assets are builded
     App\Middleware\AssetsCheckMiddleware:
         tags:
-            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 5 }
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 4 }
 
     # escape request data (for security)
     App\Middleware\EscapeRequestDataMiddleware:
         tags:
-            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 4 }
+            - { name: 'kernel.event_listener', event: 'kernel.request', priority: 3 }
 
     # security security rules
     App\Middleware\SecurityCheckMiddleware:
