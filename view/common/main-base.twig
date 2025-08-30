@@ -11,5 +11,22 @@
 </head>
 <body>
     {% block body %}{% endblock %}
+
+    {# VISITOR TRACKING SYSTEM #}
+    {% if getEnvValue('VISITOR_TRACKING_ENABLED') == 'true' %}
+        <script>
+            const visitorReferer = document.referrer || 'Unknown'
+            fetch('{{ getEnvValue("VISITOR_TRACKING_URL") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    service_name: '{{ getEnvValue("VISITOR_TRACKING_SERVICE_NAME") }}',
+                    referer: visitorReferer
+                })
+            })
+        </script>
+    {% endif %}
 </body>
 </html>

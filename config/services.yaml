@@ -15,6 +15,14 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    # twig extensions
+    # --------------------------------------------------------------------------------- #
+    # app util extension
+    App\Twig\AppUtilExtension:
+        arguments:
+            $appUtil: '@App\Util\AppUtil'
+        tags: [ 'twig.extension' ]
+
     # app middlewares
     # --------------------------------------------------------------------------------- #
     # check if assets are builded
