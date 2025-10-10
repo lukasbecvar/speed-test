@@ -18,8 +18,6 @@ class SecurityUtilTest extends TestCase
 
     protected function setUp(): void
     {
-        $_ENV['APP_SECRET'] = 'test_secret';
-
         // create instance of SecurityUtil
         $this->securityUtil = new SecurityUtil();
     }
