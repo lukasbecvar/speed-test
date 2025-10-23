@@ -24,6 +24,7 @@ class IndexController extends AbstractController
     #[Route('/', methods: ['GET'], name: 'main_index')]
     public function index(Request $request): Response
     {
+        // get visitor IP address
         $ipAddress = $request->getClientIp();
         $isPrivate = filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
 

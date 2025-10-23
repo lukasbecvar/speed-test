@@ -100,4 +100,31 @@ class AppUtilTest extends TestCase
         $_ENV['APP_ENV'] = 'prod';
         $this->assertFalse($this->appUtil->isDevMode());
     }
+
+    /**
+     * Test update environment value updates target env file
+     *
+     * @return void
+     */
+    public function testUpdateEnvValueUpdatesTargetFile(): void
+    {
+        // mock testing .env
+        $tempDir = sys_get_temp_dir() . '/app_util_' . uniqid();
+        mkdir($tempDir);
+        file_put_contents($tempDir . '/.env', "APP_ENV=test\nAPP_SECRET=old-secret\n");
+        file_put_contents($tempDir . '/.env.test', "APP_SECRET=old-secret\n");
+        $this->kernelInterface->method('getProjectDir')->willReturn($tempDir);
+
+        // call tested method
+        $this->appUtil->updateEnvValue('APP_SECRET', 'new-secret');
+
+        // assert result
+        $updatedContent = file_get_contents($tempDir . '/.env.test') ?: '';
+        $this->assertStringContainsString('APP_SECRET=new-secret', $updatedContent);
+
+        // clean up
+        unlink($tempDir . '/.env');
+        unlink($tempDir . '/.env.test');
+        rmdir($tempDir);
+    }
 }

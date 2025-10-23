@@ -1,8 +1,8 @@
 // main app functionality
 import { Gauge } from 'gaugeJS'
 
-document.addEventListener('DOMContentLoaded', function () {
-
+document.addEventListener('DOMContentLoaded', function()
+{
     // main page elements
     const pingElement = document.getElementById('ping')
     const startButton = document.getElementById('start-test')
