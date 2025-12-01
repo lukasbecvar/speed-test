@@ -49,19 +49,15 @@ class EscapeRequestDataMiddlewareTest extends TestCase
         /** @var HttpKernelInterface&MockObject $kernel */
         $kernel = $this->createMock(HttpKernelInterface::class);
         /** @var Request $request */
-        $event = new RequestEvent(
-            $kernel,
-            $request,
-            HttpKernelInterface::MAIN_REQUEST
-        );
+        $event = new RequestEvent($kernel, $request, HttpKernelInterface::MAIN_REQUEST);
 
         // call tested method
         $middleware = new EscapeRequestDataMiddleware($securityUtil);
         $middleware->onKernelRequest($event);
 
         // assert response
-        $this->assertEquals('&lt;script&gt;alert(&quot;XSS Attack!&quot;);&lt;/script&gt;', $request->get('name'));
-        $this->assertEquals('&lt;p&gt;Hello, World!&lt;/p&gt;', $request->get('message'));
-        $this->assertEquals('user@example.com', $request->get('email'));
+        $this->assertEquals('&lt;script&gt;alert(&quot;XSS Attack!&quot;);&lt;/script&gt;', $request->request->get('name'));
+        $this->assertEquals('&lt;p&gt;Hello, World!&lt;/p&gt;', $request->request->get('message'));
+        $this->assertEquals('user@example.com', $request->request->get('email'));
     }
 }
