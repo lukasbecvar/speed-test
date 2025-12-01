@@ -9,7 +9,7 @@ services:
     # composer service for managing php dependencies
     composer:
         image: composer:latest
-        container_name: admin_suite_composer
+        container_name: speed_test_composer
         working_dir: /app
         mem_limit: 1g
         volumes:
