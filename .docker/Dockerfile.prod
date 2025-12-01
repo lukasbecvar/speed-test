@@ -1,5 +1,5 @@
 # define base php-apache image (production environment)
-FROM php:8.4-apache
+FROM php:8.5-apache
 
 # set container working directory
 WORKDIR /var/www
@@ -11,9 +11,6 @@ RUN apt-get update && apt-get install -y \
 
 # install intl extension
 RUN docker-php-ext-install intl
-
-# install OPCache extension
-RUN docker-php-ext-install opcache
 
 # copy project files to container
 COPY ./.docker/configs/apache-site.conf /etc/apache2/sites-available/000-default.conf
