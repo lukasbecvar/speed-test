@@ -23,7 +23,7 @@ php:
     restart: always
     volumes:
         - ./.docker/services/log:/var/log
-    mem_limit: 1g
+    mem_limit: 2g
     ports:
         - "80:80"
 ```
