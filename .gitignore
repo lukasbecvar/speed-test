@@ -3,6 +3,7 @@
 
 # build assets
 /public/bundles
+config/reference.php
 
 # composer dependencies
 /var
